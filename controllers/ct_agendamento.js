@@ -31,6 +31,37 @@ const selecionarHorarios = async (req, res) => {
   }
 };
 
+const criarAgendamento = async (req, res) => {
+  try {
+    const { sData,
+            sHora,
+            sWhatsApp,
+            sNome,
+     } = req.body;
+
+    const sql = `
+      CALL sp_agendamento_insert(:p_dia, :p_hora, :p_whatsapp, :p_nome, :p_codigo_usuario)
+    `;
+
+    await conn.query(sql, { 
+      replacements: {
+        p_dia: sData,
+        p_hora: sHora,
+        p_whatsapp: sWhatsApp,
+        p_nome: sNome,
+        p_codigo_usuario: null,
+      }
+    });
+
+    res.status(200).json({ return: "Inserido OK!" });
+
+  } catch (err) {
+    console.error('Erro ao inserir agendamento:', err);
+    res.status(500).json({ error: 'Erro ao inserir agendamento no banco de dados.' });
+  }
+};
+
 module.exports = {
-  selecionarHorarios
+  selecionarHorarios,
+  criarAgendamento
 };

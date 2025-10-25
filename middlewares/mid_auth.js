@@ -16,8 +16,7 @@ const validateJWT = (req, res, next) => {
         
         req.user = {
             codigoUsuario: decoded.jwt_nCodigoUsuario,
-            nomeUsuario: decoded.jwt_sNomeUsuario,
-            codigoEmpresa: decoded.jwt_nCodigoEmpresa
+            nomeUsuario: decoded.jwt_sNomeUsuario
         };
         
         next();
