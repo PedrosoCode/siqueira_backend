@@ -14,10 +14,12 @@ app.use(cors())
 app.use(express.urlencoded({ extended: false }));
 
 const login_rt = require('./routes/rt_login');
+const agendamento_rt = require('./routes/rt_agendamento')
 
 app.use('/login', login_rt);
+app.use('/agendamento', agendamento_rt);
 
 app.listen(3042, () => {
     console.log('Server is running on http://localhost:3042');
-  });
+});
   
